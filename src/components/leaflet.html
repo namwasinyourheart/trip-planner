@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet.js Map with Search</title>
+
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Leaflet Control Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <style>
+        /* Map container should have a height to be visible */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Leaflet.js Map with Search Functionality</h2>
+    <div id="map"></div> <!-- Map container -->
+
+    <!-- Leaflet.js JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Leaflet Control Geocoder JavaScript -->
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <script>
+        // Initialize the map and set its view to a geographical point and zoom level
+        var map = L.map('map').setView([51.505, -0.09], 13); // Coordinates for London
+
+        // Load and display tile layers on the map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a default marker
+        var marker = L.marker([51.5, -0.09]).addTo(map);
+        marker.bindPopup("<b>Welcome!</b><br>This is London.").openPopup();
+
+        // Initialize the Leaflet Control Geocoder for searching locations
+        var geocoder = L.Control.geocoder({
+            defaultMarkGeocode: false // Disable the default behavior of placing a marker
+        }).on('markgeocode', function(e) {
+            var latlng = e.geocode.center;  // Get the coordinates of the searched location
+
+            // Remove any existing marker before placing a new one
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Place a new marker on the searched location
+            marker = L.marker(latlng).addTo(map)
+                .bindPopup("<b>Found Location!</b><br>" + e.geocode.name).openPopup();
+
+            // Pan/zoom to the searched location
+            map.setView(latlng, 15);
+        }).addTo(map);
+
+    </script>
+</body>
+</html>

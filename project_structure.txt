@@ -1,0 +1,28 @@
+project_root/
+├── index.html
+├── tailwind.config.js
+├── vite.config.js
+├── public/
+│   ├── favicon.ico
+│   ├── og-image.svg
+│   └── placeholder.svg
+├── src/
+│   ├── main.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   ├── nav-items.jsx
+│   ├── lib/
+│   │   └── utils.js
+│   ├── components/
+│   │   ├── ui/
+│   │   │   └── (various UI components)
+│   │   ├── InterestSelector.jsx
+│   │   ├── TripTypeSelector.jsx
+│   │   ├── SuggestedPlaces.jsx
+│   │   ├── DestinationSelector.jsx
+│   │   ├── DateRangePicker.jsx
+│   │   ├── TravelPlanner.jsx
+│   │   └── DetailedItinerary.jsx
+│   └── pages/
+│       └── Index.jsx
+└── (various configuration files)
